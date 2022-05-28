@@ -2,10 +2,8 @@
 
 import React, {useState} from 'react'
 import {Typography, Button, Form, Input, Checkbox} from 'antd'; 
-// import FileUpload from '../../utils/FileUpload'; //파일 업로드
 import axios from 'axios';
-//
-import { Brands,  Ages, Functions } from './Section/Datas'
+
 import FileUpload from '../../utils/FileUpload';
 
 const CheckboxGroup = Checkbox.Group;
@@ -13,6 +11,41 @@ const CheckboxGroup = Checkbox.Group;
 const { Title } = Typography;
 const { TextArea } = Input;
 
+//브랜드 정의
+const Brands = [
+    { key: 1, value: "NOW" }, { key: 2, value: "로얄캐닌" },
+    { key: 3, value: "ANF" }, { key: 4, value: "오리젠" },
+    { key: 5, value: "네츄럴코어" }, { key: 6, value: "마이펫닥터" },
+    { key: 7, value: "아카나" }, { key: 8, value: "하림펫푸드" },
+    { key: 9, value: "내추럴발란스" }, { key: 10, value: "듀먼" }
+]
+
+//급여대상
+const Ages = [
+    { key: 1, value: "퍼피" },
+    { key: 2, value: "어덜트" },
+    { key: 3, value: "시니어" },
+    { key: 4, value: "대형견" },
+    { key: 5, value: "임신/수유" },
+    { key: 6, value: "전연령견" }
+]
+
+//기능
+const Functions = [
+    { key: 1, value: "다이어트/중성화" },
+    { key: 2, value: "인도어피" },
+    { key: 3, value: "저알러지" },
+    { key: 4, value: "피부/털개선" },
+    { key: 5, value: "눈물개선/눈건강" },
+    { key: 6, value: "비뇨계" },
+    { key: 7, value: "뼈/관절강화" },
+    { key: 8, value: "퍼포먼스" },
+    { key: 9, value: "냄새제거" },
+    { key: 10, value: "치석제거/구강관리" },
+    { key: 11, value: "면역력강화" },
+    { key: 12, value: "영양공급" },
+    { key: 13, value: "처방식" }
+]
 
 function UploadProductPage(props) {
 
@@ -22,11 +55,24 @@ function UploadProductPage(props) {
         setTitle(event.currentTarget.value)
     }
 
+    // 설명
+    const [Description, setDescription] = useState("")
+    const descriptionChangeHandler = (event) => {
+        setDescription(event.currentTarget.value)
+    }
+
     // 가격
-    const [Price, setPrice] = useState(0)  //0부터 시작
+    const [Price, setPrice] = useState()  //0부터 시작
     const priceChangeHandler = (event) => {
         setPrice(event.currentTarget.value)
     }
+
+        // 이미지
+    const [Images, setImages] = useState([]) // array로 줌
+    const updateImages = (newImages) => {
+        setImages(newImages) //이미지가 변경될 때마다 서버에 정보 전달
+    }
+
 
     // 브랜드
     const [Brand, setBrand] = useState(1)
@@ -53,24 +99,14 @@ function UploadProductPage(props) {
         if(isChecked) {
             checkedItems.add(id);
             setcheckedItems(checkedItems);
-            box.style.backgroundColor = "#F6CB44";
         }
         else if (!isChecked && checkedItems.has(id)) {
             checkedItems.delete(id);
             setcheckedItems(checkedItems);
-            box.style.backgroundColor = "#fff";
         }
-        console.log([...checkedItems]);
+
         return checkedItems;
     }
-
-
-    // 이미지
-    const [Images, setImages] = useState([]) // array로 줌
-    const updateImages = (newImages) => {
-        setImages(newImages) //이미지가 변경될 때마다 서버에 정보 전달
-    }
-
 
 
     const submitHandler = (event) => {
@@ -89,11 +125,12 @@ function UploadProductPage(props) {
             price: Price,
             brand: Brand,
             age: Age,
+            description: Description,
             function: [...checkedItems],
             images: Images
         }
 
-        axios.post("/api/product", body)
+        axios.post("/api/product/uploadProduct", body)
             .then(response => {// 백엔드 결과값을 response 변수에 넣어줌
                 if(response.data.success) { // 성공하면
                     alert('상품업로드 성공')
@@ -102,9 +139,6 @@ function UploadProductPage(props) {
                     alert('상품업로드 실패')
                 }
             })
-
-
-
     }
 
  return (
@@ -131,7 +165,7 @@ function UploadProductPage(props) {
             <Input onChange={titleChangeHandler} value={Title} />
             <br />
             <br />
-            <label>가격($)</label>
+            <label>가격</label>
             <Input type="number" onChange={priceChangeHandler} value={Price}/>
             <br />
             <br />
@@ -156,7 +190,7 @@ function UploadProductPage(props) {
             <br />
             <label>기능</label>
             <br />
-            <div className="contStyle">
+            <div className="contStyle" >
                 {Functions.map((item) => (
                     <label key={item.key} >
                         <input
@@ -169,6 +203,10 @@ function UploadProductPage(props) {
                      </label>
                     ))}
                 </div>
+            <br />
+            <label>설명</label>
+            <TextArea onChange={descriptionChangeHandler} value={Description}/>
+            <br />
 
             <br />
 
@@ -183,7 +221,14 @@ function UploadProductPage(props) {
     </div>
   )
 
-                }
+}
+
+export {
+    Brands,
+    Ages,
+    Functions
+
+}
 
 
 export default UploadProductPage
