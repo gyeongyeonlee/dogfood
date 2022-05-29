@@ -33,7 +33,7 @@ const Ages = [
 //기능    
 const Functions = [
     { key: 1, value: "다이어트/중성화" },
-    { key: 2, value: "인도어피" },
+    { key: 2, value: "인도어" },
     { key: 3, value: "저알러지" },
     { key: 4, value: "피부/털개선" },
     { key: 5, value: "눈물개선/눈건강" },

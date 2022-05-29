@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const { reset } = require('nodemon');
 const { Product } = require('../models/Product');
+const { Review } = require('../models/Review');
 
 //=================================
 //             product
@@ -108,8 +109,7 @@ router.post('/products', (req,res) => { // ->/api/product
 
 });
   
-router.get('/products_by_id', (req,res) => { // ->/api/product
-  
+router.get('/products_by_id', async (req,res) => { // ->/api/product
   //쿼리를 이용해서 가져옴 body말고 id,type 이용
   let type = req.query.type
   let productIds = req.query.id
@@ -124,16 +124,22 @@ router.get('/products_by_id', (req,res) => { // ->/api/product
   }
 
   //productId를 이용해서 db에서 productid 같은 상품의 정보 가져온다
+  const products = await Product.find({ _id: { $in: productIds }})
+  const reviews = await Review.find({ product: { $in: productIds }}).populate('author')
 
-  Product.find({ _id: { $in: productIds }})
-  .populate('writer')
-  .exec((err, product) => {
-    if(err) return res.status(400).send(err)
-    return res.status(200).send(product)
+  res.status(200).send({
+    products: products,
+    reviews: reviews
   })
 
+  // 전코드
+  // Product.find({ _id: { $in: productIds }})
+  // .populate('writer')
+  // .exec((err, product) => {
+  //   if(err) return res.status(400).send(err)
+  //   return res.status(200).send(product)
+  // })
+  
 });
-
- 
 
 module.exports = router;

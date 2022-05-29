@@ -7,7 +7,8 @@ import {
     ADD_TO_CART,
     GET_CART_ITEMS,
     REMOVE_CART_ITEM,
-    ON_SUCCESS_BUY
+    ON_SUCCESS_BUY,
+    UPLOAD_REVIEW
 } from './types';
 import { USER_SERVER } from '../components/Config.js';
 
@@ -144,6 +145,19 @@ export function onSuccessBuy(data) {
 
     return {
         type: ON_SUCCESS_BUY,
+        payload: request
+    }
+}
+
+export function uploadReview(data){
+
+
+    const request = axios.post(`/api/users/uploadReview`, data)
+        .then(response => response.data);
+            
+    
+    return {
+        type: UPLOAD_REVIEW,
         payload: request
     }
 }

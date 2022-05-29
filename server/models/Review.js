@@ -7,12 +7,16 @@ const reviewSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    product: {
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
+    },
     rate: {
         type: Number
     },
     content: {
         type: String,
-        maxlength: 500
+        maxlength: 5000
     }
 }, {timestamps: true })
 

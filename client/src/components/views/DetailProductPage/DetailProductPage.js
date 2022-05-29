@@ -23,8 +23,8 @@ function DetailProductPage(props) {
 
         axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
         .then(response => {
-            setProduct(response.data[0]) //product 정보 Product에 들어감
-            setReview(response.data[0]['review'])
+            setProduct(response.data.products[0]) //product 정보 Product에 들어감
+            setReview(response.data.reviews)
             /*
             if(response.data.success) {
                 if(response.data.success){
@@ -42,6 +42,7 @@ function DetailProductPage(props) {
 
 
     const pageSize = 5;
+    console.log("review", Review)
     let [State, setState] = useState({
         data: Review,
         totalPage: Review.length / pageSize, //2

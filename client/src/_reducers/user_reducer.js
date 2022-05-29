@@ -6,7 +6,8 @@ import {
     ADD_TO_CART,
     GET_CART_ITEMS,
     REMOVE_CART_ITEM,
-    ON_SUCCESS_BUY
+    ON_SUCCESS_BUY,
+    UPLOAD_REVIEW
 } from '../_actions/types';
 
 
@@ -44,7 +45,12 @@ export default function(state={},action){
             return { ...state, cartDetail: action.payload.cartDetail,
             userData:{
                 ...state.userData, cart: action.payload.cart
-            } }         
+            } }    
+        
+        case UPLOAD_REVIEW: 
+            return { ...state, userData: action.payload }            
+
+            
         default:
             return state;
     }

@@ -10,7 +10,7 @@ function ProductReview(props) { //product로 보내주고있음
     <div>
     <Rate disabled defaultValue={props.detail.rate} />
     <Comment
-    author={"구매자"}
+    author={props.detail.author.name}
     content={ props.detail.content }
     datetime={
         <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>

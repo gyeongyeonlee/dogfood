@@ -3,10 +3,12 @@ const router = express.Router();
 const { User } = require("../models/User");
 const { Product } = require("../models/Product");
 const { Payment } = require("../models/Payment");
+const { Review } = require("../models/Review");
+
 
 const { auth } = require("../middleware/auth");
 
-const { admin } = require("../middleware/admin");
+// const { admin } = require("../middleware/admin");
 
 const async = require('async');
 
@@ -267,8 +269,21 @@ router.post('/successBuy', auth, (req, res) => {
 
         })
         }
-    )
-
-    
+    )    
 })
+
+
+//HistoryPage에서 Review
+router.post('/uploadReview', (req,res) => { 
+    //받아온 정보들 db에 넣어준다
+    const review = new Review(req.body)
+  
+    review.save((err) => {
+        if (err) return res.status(400).json({ success: false, err })
+        return res.status(200).json({ success: true })
+    })
+  
+  });
+
+
 module.exports = router;

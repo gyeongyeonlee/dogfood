@@ -52,15 +52,16 @@ function ProductInfo(props) {
             <Descriptions.Item label="브랜드" span={2}>{brand}</Descriptions.Item>
             <Descriptions.Item label="기능" span={4}>{fun}</Descriptions.Item>
             <Descriptions.Item label="급여대상" span={4}>{age}</Descriptions.Item>
-            <Descriptions.Item label="설명" span={4}>{props.detail.description}</Descriptions.Item>
+            <Descriptions.Item label="주원료" span={4}>{props.detail.description}</Descriptions.Item>
         </Descriptions>
             <br />
             <br />
             <br />
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Button size='large' shape="round"  onClick={clickHandler}>
-                    바로구매
+                    구매하기
                 </Button>
+                
                 
                 
             </div>
