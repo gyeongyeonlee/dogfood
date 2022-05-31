@@ -18,10 +18,11 @@ function SearchFeature(props) {
     <div>
 
     <Search
-        placeholder="input search text"
+        placeholder="검색어를 입력하세요"
         onChange={searchHandler}
-        style={{ width: 200}}
+        style={{ width: 300}}
         value={SearchTerm} //value 바뀌면서 값 달라짐
+        size="large"
 
         />
 

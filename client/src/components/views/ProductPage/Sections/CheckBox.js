@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Collapse, Checkbox } from 'antd';
+import { Checkbox,Col } from 'antd';
 
 
 //const { Panel } = Collapse;
@@ -32,9 +32,11 @@ function CheckBox(props) { //continents를 list로 넣어줌
 
   const renderCheckboxLists = () => props.list && props.list.map((value, index) => (
     <React.Fragment key={index} >
+     <Col lg={{ span: 4}} md={8} sm={24}> 
       <Checkbox onChange={() => handleToggle(value._id)} 
           checked={Checked.indexOf(value._id) === -1 ? false : true} />
         <span>{value.name}</span>
+        </Col>
     </React.Fragment>
   ))
 

@@ -13,7 +13,7 @@ function ProductPage() {
 
     const [Products, setProducts] = useState([]) //db에서 상품정보 가져오기
     const [Skip, setSkip] = useState(0) 
-    const [Limit, setLimit] = useState(8)
+    const [Limit, setLimit] = useState(12)
     const [PostSize, setPostSize] = useState(0)
     const [Filters, setFilters] = useState({
         brand: [],
@@ -81,7 +81,6 @@ function ProductPage() {
         <Meta 
             title={product.title}
             description={`₩${product.price}`}
-            //rate={product.review.rate}
         />
         </Card>
         </Col>
@@ -152,20 +151,25 @@ function ProductPage() {
             { /*Filter */}
 
             <Row gutter={[16, 16]}>
-            <Card size="small" title="브랜드" 
+            {/* <Card size="small" title="브랜드" 
                 headStyle={{ backgroundColor: "#F7F2E0"}}  defaultActiveKey={['0']} >
                     
                         <Checkbox list={brand}
                         handleFilters={filters => handleFilters(filters, "brand")}/>            
                     
-                </Card>
-                <Collapse defaultActiveKey={['0']} >
+                </Card> */}
+                {/* key=123/111 */}
+                <Collapse defaultActiveKey={['0']} accordion>
+                    <Panel header="브랜드" key="1" >
+                        <Checkbox list={brand}
+                        handleFilters={filters => handleFilters(filters, "brand")}/>            
+                    </Panel>
+
                     <Panel header="급여대상" key="1">
                         <Checkbox list={age}
                         handleFilters={filters => handleFilters(filters, "age")}/>            
                     </Panel>
-                </Collapse>
-                <Collapse defaultActiveKey={['0']} >
+
                     <Panel header="가격" key="1">
                         <Radiobox list={price}
                         handleFilters={filters => handleFilters(filters, "price")}/>          
@@ -175,11 +179,11 @@ function ProductPage() {
 
                 
 
-           
+            {/* flex_end */}
             { /*Search */}
             <div style={{ 
                 display: 'flex',
-                justifyContent: 'flex_end',
+                justifyContent: 'right',
                 margin: '1rem auto'}}>
                 <SearchFeature 
                     refreshFunction={updateSearchTerm}

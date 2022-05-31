@@ -54,7 +54,7 @@ router.post('/products', (req,res) => { // ->/api/product
   for(let key in req.body.filters) {
     if(req.body.filters[key].length > 0) { //한 개 이상 들어있으면
         
-        console.log('key', key)
+        //console.log('key', key)
 
         if(key === "price") {
             findArgs[key] = {
@@ -139,7 +139,59 @@ router.get('/products_by_id', async (req,res) => { // ->/api/product
   //   if(err) return res.status(400).send(err)
   //   return res.status(200).send(product)
   // })
+
+  
   
 });
+
+//랭킹 
+router.post('/rankingProduct', (req,res) => {   
+     
+  if(req.body.sold){
+    Product.find().sort({"sold":-1}).limit(12)  
+    .exec((err, productInfo) => {
+      if(err) return res.status(400).json({ success: false, err})
+      return res.status(200).json({ 
+        success: true, 
+        productInfo,
+        sold: true,
+      })
+    })
+
+  }
+  if(req.body.view){
+    console.log(req.body.view)
+    Product.find().sort({"views":-1}).limit(12)    
+    .exec((err, productInfo) => {
+      if(err) return res.status(400).json({ success: false, err})
+      return res.status(200).json({ 
+        success: true, 
+        productInfo,
+        view: true,
+      })
+    })
+  }
+  
+});
+
+//메인페이지 - 신상품
+router.post('/new_product', (req,res) => {   
+     
+  if(req.body) {
+    Product.find().sort({'_id':-1}).limit(6)
+    .exec((err, productInfo) => {
+      if(err) return res.status(400).json({ success: false, err})
+      return res.status(200).json({ 
+        success: true, 
+        productInfo
+  
+      })
+    })
+  }
+  
+  }
+
+
+);
 
 module.exports = router;

@@ -81,7 +81,7 @@ router.get("/logout", auth, (req, res) => {
 
 router.post("/addToCart", auth, (req, res) => {
     //1. User collection 에서 해당 유저의 정보 가져오기
-    console.log(req.user)
+    //console.log(req.user)
     User.findOne({_id: req.user._id},
     (err, userInfo) => {
 
