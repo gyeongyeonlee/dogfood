@@ -47,8 +47,9 @@ def predict(new_sentence):
   max_len = max(len(review) for review in new_sentence)
   new_sentence = pad_sequences(new_sentence, maxlen=max_len)
 
-  loaded_model = load_model('BiLSTM_b32.h5')
+  loaded_model = load_model('best_model4.h5')
   score = loaded_model.predict(new_sentence)
+  # print(score)
 
   f = open('result.csv', 'w', encoding='utf8', newline='')
   wr = csv.writer(f)

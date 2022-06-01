@@ -54,7 +54,7 @@ def predict(before_sentence, new_sentence):
   encoded = tokenizer.texts_to_sequences([new_sentence])
   pad_new = pad_sequences(encoded, maxlen = 416)
 
-  loaded_model = load_model('BiLSTM_b32.h5')
+  loaded_model = load_model('best_model4.h5')
   score = float(loaded_model.predict(pad_new))
 
   f = open('new_result.csv', 'w', encoding='utf8', newline='')

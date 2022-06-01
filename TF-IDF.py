@@ -43,7 +43,7 @@ sim_scores = sorted(sim_scores, key = lambda x: x[1], reverse=True) # 유사도�
 # print(sim_scores[0:5]) # 상위 10개의 인덱스와 유사도를 추출
 
 # 인덱스를 Title로 변환 
-sim_scores = [(product_id[i], score) for i, score in sim_scores[0:5]]
+sim_scores = [(product_id[i], score) for i, score in sim_scores[0:4]]
 for i in range(len(sim_scores)):
     if i == len(sim_scores) - 1:break
     print(sim_scores[i][0], end=',')

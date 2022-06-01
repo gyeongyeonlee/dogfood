@@ -273,7 +273,7 @@ router.post('/successBuy', auth, (req, res) => {
 })
 
 
-//HistoryPage에서 Review
+//HistoryPage에서 구매 목록
 router.post('/uploadReview', (req,res) => { 
     //받아온 정보들 db에 넣어준다
     const review = new Review(req.body)
@@ -299,7 +299,7 @@ router.post('/uploadReview', (req,res) => {
     });
   
     const spawn = require('child_process').spawn;
-    const model = spawn('python', ['new_review_predict.py', 'total_review.csv', 'new_review_predict_result.csv']);
+    const model = spawn('python', ['new_review_predict.py', 'total_review_revised.csv', 'new_review_predict_result.csv']);
   
     model.stdout.on('data', function(data){
         review.save((err) => {
@@ -313,6 +313,15 @@ router.post('/uploadReview', (req,res) => {
     model.stderr.on('data', function(data){
         console.log(data.toString());
     })
+  });
+
+
+//HistoryPage에서 Review 목록
+router.post('/uploadReview', (req,res) => { 
+    //받아온 정보들 db에 넣어준다
+    const review = new Review(req.body)
+    
+    
   });
 
 

@@ -127,19 +127,23 @@ router.get('/products_by_id', async (req,res) => { // ->/api/product
   const spawn = require('child_process').spawn;
   const model = spawn('python', ['TF-IDF.py', 'products.csv', products[0]['title']]);
 
-  model.stdout.on('data', function(data){ 
+  model.stdout.on('data', async function(data){ 
     const similar_product = data.toString().split(',')
-    // console.log(similar_product)
-    for(var i = 0; i < similar_product.length; i++){
-      console.log(similar_product[i])
-      }
-      // const similar_list = Product.find().where('title').in(similar_product)
-      // console.log(similar_list)
-    res.status(200).send({
-      products: products,
-      reviews: reviews,
-      similarity: similar_product
-      // similarity: similar_list
+    similar_product[3] = similar_product[3].trim()
+
+    const similar_list = await Product.find().where('title').in(similar_product)
+    const model = spawn('python', ['word_frequency.py', 'csv-writer.csv']);
+
+    model.stdout.on('data', async function(data){
+      const hashtag = data.toString().split(',')
+      hashtag[9] = hashtag[9].trim()
+
+      res.status(200).send({
+        products: products,
+        reviews: reviews,
+        similarity: similar_list,
+        hashtag: hashtag
+      })
     })
   })
 

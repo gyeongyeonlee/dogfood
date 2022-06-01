@@ -55,8 +55,7 @@ function ProductInfo(props) {
             <Descriptions.Item label="주원료" span={4}>{props.detail.description}</Descriptions.Item>
         </Descriptions>
             <br />
-            <br />
-            <br />
+
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Button size='large' shape="round"  onClick={clickHandler}>
                     구매하기
