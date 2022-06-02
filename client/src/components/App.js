@@ -13,6 +13,7 @@ import CartPage from './views/CartPage/CartPage';
 import LandingPage from './views/LandingPage/LandingPage'
 import HistoryPage from './views/HistoryPage/HistoryPage'
 import RankingPage from './views/RankingPage/RankingPage'
+import RecommendPage from './views/RecommendPage/RecommendPage'
 
 
 
@@ -37,7 +38,7 @@ function App() {
           <Route exact path="/user/cart" component={Auth(CartPage, true)} />
           <Route exact path="/history" component={Auth(HistoryPage, true)} />
           <Route exact path="/ranking" component={Auth(RankingPage, null)} />
-
+          <Route exact path="/recommend" component={Auth(RecommendPage, null)} />
 
         </Switch>
       </div>

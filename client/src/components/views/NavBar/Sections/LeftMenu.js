@@ -27,7 +27,7 @@ function LeftMenu(props) {
       </MenuItemGroup> */}
     </SubMenu>
 
-    <SubMenu title={<span>추천</span>} />
+    <SubMenu title={<span><a href="/recommend">추천</a></span>} />
 {/*     
     <SubMenu title={<span>FAQ</span>} />
        */}

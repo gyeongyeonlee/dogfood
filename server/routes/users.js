@@ -316,13 +316,16 @@ router.post('/uploadReview', (req,res) => {
   });
 
 
-//HistoryPage에서 Review 목록
-router.post('/uploadReview', (req,res) => { 
-    //받아온 정보들 db에 넣어준다
-    const review = new Review(req.body)
-    
-    
-  });
+// //HistoryPage에서 Review 목록
+// router.get('/reviewList', async (req,res) => { 
+//     //받아온 정보들 db에 넣어준다
+//     console.log('받아온값:', req.query.id)
+//     const reviews = await Review.find({ author: { $in: req.query.id }})
+//     // console.log(reviews)
+//     res.status(200).send({
+//         reviews: reviews
+//       })
+//   });
 
 
 module.exports = router;

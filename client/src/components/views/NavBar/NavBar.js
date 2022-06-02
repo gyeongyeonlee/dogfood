@@ -14,7 +14,6 @@ function NavBar() {
   const onClose = () => {
     setVisible(false)
   };
-
   return (
     <nav className="menu" style={{ position: 'fixed', zIndex: 5, width: '100%' }}>
       <div className="menu__logo" style={{ }}>
