@@ -14,13 +14,6 @@ import ImageSlider from '../../utils/ImageSlider';
 
 import product from '../../../images/product.jpg'
 
-// import * as tf from '@tensorflow/tfjs';
-
-// (async () => {
-//     const model = await tf.loadLayersModel('https://cdn.glitch.global/d6851aff-53c5-4e67-aa5a-663291f9b837/model.json?v=1653844242379');
-// })();
-
-
 
 function DetailProductPage(props) {
 
@@ -107,10 +100,10 @@ function DetailProductPage(props) {
         });
       };
     
-    const renderCards = Similar.map((product, index) =>{
+      const renderCards = Similar.map((product, index) =>{
 
         //lg 화면 가장 클때 6*4 /md 중간사이즈 8*3 /xs 가장작을때 24*1
-        return <Col lg={6} md={8} xs={24} key={index} >
+        return <Col lg={6} md={12} xs={24} key={index} >
 
                 <Card 
                 //product/productid로 링크생성

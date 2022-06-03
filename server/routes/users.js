@@ -328,4 +328,13 @@ router.post('/uploadReview', (req,res) => {
 //   });
 
 
+  // 유저 정보 가져오기
+  router.post('/getuser', async (req,res) => {   
+    const user = await User.find().where('_id').equals(req.body.userId)
+    res.status(200).send({
+        success: true,
+        dog_breed: user[0].dog_breed
+      })
+    });
+
 module.exports = router;

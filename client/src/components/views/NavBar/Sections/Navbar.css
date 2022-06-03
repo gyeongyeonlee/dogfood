@@ -28,8 +28,8 @@
   display: inline-block;
   font-size: 30px;
   padding: 12px 12px;
-  font-family: serif;
-  color: red;
+  font-family: Impact, Charcoal, fantasy;
+  color: blue;
 }
 
 .menu__container .ant-menu-item {

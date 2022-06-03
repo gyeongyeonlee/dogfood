@@ -244,16 +244,13 @@ router.post('/new_product', (req,res) => {
   });
 
   router.post('/recommend', async (req,res) => { // ->/api/product
-    console.log("서버 유저아이디:", req.body.userId)
   
     // 관리자 아이디 제외한 리뷰들 가져오기
     const reviews = await Review.find({ author: { $nin: '6291e50b2940193b4089a209' }})
-    console.log(reviews)
 
     // 가장 높은 별점을 준 상품 가져오기
     // const highRate = await Review.find({ author: { $in: req.body.userId }})
     const highRate = await Review.find().where('author').equals(req.body.userId).sort('-rate')
-    console.log("높은평점리뷰:", highRate[0].product)
 
     const txtHeader = ['author', 'product', 'rate'];
     const csvWriterHeader = txtHeader.map((el) => {
@@ -287,7 +284,6 @@ router.post('/new_product', (req,res) => {
       cosine_list[4] = cosine_list[4].trim()
   
       const cosine_similar_list = await Product.find().where('_id').in(cosine_list)
-      console.log(cosine_similar_list)
       
       res.status(200).send({
         success: true,

@@ -14,6 +14,7 @@ import LandingPage from './views/LandingPage/LandingPage'
 import HistoryPage from './views/HistoryPage/HistoryPage'
 import RankingPage from './views/RankingPage/RankingPage'
 import RecommendPage from './views/RecommendPage/RecommendPage'
+import Introduce from './views/Introduce/Introduce'
 
 
 
@@ -39,6 +40,7 @@ function App() {
           <Route exact path="/history" component={Auth(HistoryPage, true)} />
           <Route exact path="/ranking" component={Auth(RankingPage, null)} />
           <Route exact path="/recommend" component={Auth(RecommendPage, null)} />
+          <Route exact path="/introduce" component={Auth(Introduce, null)} />
 
         </Switch>
       </div>
